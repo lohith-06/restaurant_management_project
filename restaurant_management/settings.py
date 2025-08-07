@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'orders',
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -60,7 +61,7 @@ ROOT_URLCONF = 'restaurant_management.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'home' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
