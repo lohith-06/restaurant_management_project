@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import render
+from home.views import home_view, about_view
 
 def custom_404_view(request, exception):
     return render(request, '404.html', status=404)
@@ -26,7 +27,13 @@ handler404 = custom_404_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
+    path('', home_view, name='home'),
+    path('about/', about_view, name='about'),
     path('account/', include('account.urls')),
     path('products/', include('products.urls')),
     path('orders/', include('orders.urls')),
 ]
+
+
+
+    
