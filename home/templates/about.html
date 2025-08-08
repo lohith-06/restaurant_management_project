@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Us - {{ restaurant_name|default:"Our Restaurant" }}</title>
+</head>
+<body style="font-family: Arial, sans-serif; text-align: center; padding: 50px;">
+    <h1>About Our Restaurant</h1>
+    <p style="max-width: 600px; margin: auto;">
+        Welcome to <strong>{{ restaurant_name|default:"Our Restaurant" }}</strong>!  
+        We pride ourselves on serving fresh, delicious, and high-quality dishes.  
+        Our chefs use only the best ingredients to ensure every bite is memorable.
+    </p>
+    <img src="https://via.placeholder.com/500x300" alt="Restaurant Image" style="margin-top: 20px; border-radius: 10px;">
+    <br><br>
+    <a href="/" style="text-decoration: none; color: blue;">🏠 Back to Home</a>
+</body>
+</html>
