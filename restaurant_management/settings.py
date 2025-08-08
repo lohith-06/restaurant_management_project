@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+RESTAURANT_NAME = "The Gourmet Spot"
 
 # Application definition
 
