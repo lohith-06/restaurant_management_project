@@ -1,57 +1,61 @@
-<!-- home/templates/home/index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Restaurant Homepage</title>
+  <title>Contact Us</title>
   <style>
-    .search-container {
-      display: flex;
-      justify-content: center;
-      margin: 20px 0;
-    }
-
-    .search-box {
-      width: 300px;
-      padding: 10px;
-      border-radius: 25px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      outline: none;
-      transition: all 0.3s ease;
-    }
-
-    .search-box:focus {
-      border-color: #007BFF;
-      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    }
-
-    .search-button {
-      margin-left: 10px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 25px;
-      background-color: #007BFF;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .search-button:hover {
-      background-color: #0056b3;
+    .error {
+      color: red;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <h1 style="text-align:center;">Welcome to Our Restaurant</h1>
+  <h1>Contact Us</h1>
+  
+  <form id="contactForm">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <span id="nameError" class="error"></span><br>
 
-  <div class="search-container">
-    <form method="GET" action="#">
-      <input type="text" name="q" placeholder="Search menu items..." class="search-box" />
-      <button type="submit" class="search-button">Search</button>
-    </form>
-  </div>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email"><br>
+    <span id="emailError" class="error"></span><br>
 
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message"></textarea><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+      let isValid = true;
+
+      // Reset errors
+      document.getElementById("nameError").textContent = "";
+      document.getElementById("emailError").textContent = "";
+
+      // Name validation
+      const name = document.getElementById("name").value.trim();
+      if (name === "") {
+        document.getElementById("nameError").textContent = "Name is required.";
+        isValid = false;
+      }
+
+      // Email validation
+      const email = document.getElementById("email").value.trim();
+      if (email === "") {
+        document.getElementById("emailError").textContent = "Email is required.";
+        isValid = false;
+      }
+
+      // Stop submission if invalid
+      if (!isValid) {
+        event.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>
