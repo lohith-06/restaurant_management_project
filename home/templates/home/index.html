@@ -1,61 +1,12 @@
+<!-- base.html -->
+<html>
+  <body>
+    {% block content %}{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Contact Us</title>
-  <style>
-    .error {
-      color: red;
-      font-size: 14px;
-    }
-  </style>
-</head>
-<body>
-  <h1>Contact Us</h1>
-  
-  <form id="contactForm">
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name"><br>
-    <span id="nameError" class="error"></span><br>
-
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email"><br>
-    <span id="emailError" class="error"></span><br>
-
-    <label for="message">Message:</label><br>
-    <textarea id="message" name="message"></textarea><br><br>
-
-    <button type="submit">Submit</button>
-  </form>
-
-  <script>
-    document.getElementById("contactForm").addEventListener("submit", function(event) {
-      let isValid = true;
-
-      // Reset errors
-      document.getElementById("nameError").textContent = "";
-      document.getElementById("emailError").textContent = "";
-
-      // Name validation
-      const name = document.getElementById("name").value.trim();
-      if (name === "") {
-        document.getElementById("nameError").textContent = "Name is required.";
-        isValid = false;
-      }
-
-      // Email validation
-      const email = document.getElementById("email").value.trim();
-      if (email === "") {
-        document.getElementById("emailError").textContent = "Email is required.";
-        isValid = false;
-      }
-
-      // Stop submission if invalid
-      if (!isValid) {
-        event.preventDefault();
-      }
-    });
-  </script>
-</body>
+    <footer style="background:#333; color:#fff; padding:15px; text-align:center; margin-top:40px;">
+      <p><strong>Opening Hours:</strong></p>
+      <p>Mon–Fri: 11am – 9pm</p>
+      <p>Sat–Sun: 10am – 10pm</p>
+    </footer>
+  </body>
 </html>
