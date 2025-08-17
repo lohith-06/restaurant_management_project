@@ -58,11 +58,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'restaurant_management.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'home' / 'templates'],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,10 +69,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'yourapp.context_processors.restaurant_info',  # add this line
             ],
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'restaurant_management.wsgi.application'
 
