@@ -58,6 +58,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'restaurant_management.urls'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -74,7 +75,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 WSGI_APPLICATION = 'restaurant_management.wsgi.application'
 
