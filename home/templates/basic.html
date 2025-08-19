@@ -5,7 +5,14 @@
     <title>{% block title %}My Restaurant{% endblock %}</title>
 </head>
 <body>
+        {% extends "base.html" %}
 
+        {% block title %}Home - {{ restaurant_name }}{% endblock %}
+
+        {% block content %}
+        <h1>Welcome to {{ restaurant_name }}</h1>
+        <p>Enjoy our delicious meals!</p>
+        {% endblock %}
     <!-- Page Content -->
     <div class="content">
         {% block content %}{% endblock %}
