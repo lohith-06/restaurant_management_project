@@ -1,15 +1,23 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Restaurant Management</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h1>Welcome to the Restaurant Management System</h1>
-        <p>Manage your restaurant orders, products, and staff seamlessly.</p>
+{% extends "base.html" %}
+
+{% block title %}Home - {{ restaurant_name }}{% endblock %}
+
+{% block content %}
+    <h1 style="text-align:center;">Our Menu</h1>
+    
+    <div style="max-width:800px; margin:auto;">
+        {% if menu_items %}
+            <ul style="list-style:none; padding:0;">
+                {% for item in menu_items %}
+                    <li style="border:1px solid #ddd; margin:10px 0; padding:15px; border-radius:8px;">
+                        <h3>{{ item.name }}</h3>
+                        <p>{{ item.description }}</p>
+                        <strong>Price: ₹{{ item.price }}</strong>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No menu items available right now.</p>
+        {% endif %}
     </div>
-</body>
-</html>
+{% endblock %}
