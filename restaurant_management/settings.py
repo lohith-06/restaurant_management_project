@@ -27,8 +27,7 @@ SECRET_KEY = 'django-insecure-s^x_u!itekxd=@a3o3zv4d%hw$j6d#2v358wgltxl8rc(-^t&p
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
-RESTAURANT_NAME = "The Gourmet Spot"
+RESTAURANT_NAME = "Tasty Bites" 
 
 # Application definition
 
