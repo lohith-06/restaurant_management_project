@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+from django.urls import path
+from . import views
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -58,7 +59,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'restaurant_management.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -75,6 +75,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'restaurant_management.wsgi.application'
 
@@ -130,3 +131,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+urlpatterns = [
+    path("contact/", views.contact_us, name="contact"),
+    path("contact/success/", views.contact_us, name="contact_success"),  # temporary reuse
+]
