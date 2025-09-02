@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 from django.urls import path
 from . import views
@@ -40,6 +40,9 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # EMAIL_HOST_USER = "your_email@gmail.com"
 # EMAIL_HOST_PASSWORD = "your_password"
 
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_FROM_EMAIL = "restaurant@example.com"
 RESTAURANT_EMAIL = "owner@example.com"
 INSTALLED_APPS = [
