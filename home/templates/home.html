@@ -8,17 +8,35 @@
 </head>
 <body>
     <div class="container"><!-- templates/home.html -->
+            <!-- templates/home.html -->
 <h1>Welcome to Our Restaurant</h1>
 
 {% if location %}
   <h3>Find Us At:</h3>
-  <p>
-    {{ location.address }} <br>
-    {{ location.city }}, {{ location.state }} {{ location.zip_code }}
-  </p>
-{% else %}
-  <p>Restaurant address coming soon...</p>
+  <p>{{ location.address }}, {{ location.city }}, {{ location.state }} {{ location.zip_code }}</p>
 {% endif %}
+
+<!-- 🔎 Search Bar -->
+<form method="get" action="">
+  <input type="text" name="q" placeholder="Search menu..." value="{{ query|default:'' }}">
+  <button type="submit">Search</button>
+</form>
+
+<hr>
+
+<h2>Our Menu</h2>
+<ul>
+  {% for item in menu_items %}
+    <li>
+      <strong>{{ item.name }}</strong> - {{ item.description }} - ${{ item.price }}
+      {% if item.image %}
+        <br><img src="{{ item.image.url }}" alt="{{ item.name }}" width="120">
+      {% endif %}
+    </li>
+  {% empty %}
+    <li>No items found.</li>
+  {% endfor %}
+</ul>
                 
     </div>
 </body>
