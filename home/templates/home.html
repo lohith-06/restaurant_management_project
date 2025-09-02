@@ -7,13 +7,19 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <div class="container">
-                {% extends "base.html" %}
+    <div class="container"><!-- templates/home.html -->
+<h1>Welcome to Our Restaurant</h1>
 
-                {% block content %}
-                <h1>Welcome to {{ restaurant_name }}</h1>
-                {% endblock %}
-        <p>Manage your restaurant orders, products, and staff seamlessly.</p>
+{% if location %}
+  <h3>Find Us At:</h3>
+  <p>
+    {{ location.address }} <br>
+    {{ location.city }}, {{ location.state }} {{ location.zip_code }}
+  </p>
+{% else %}
+  <p>Restaurant address coming soon...</p>
+{% endif %}
+                
     </div>
 </body>
 </html>
