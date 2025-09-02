@@ -30,7 +30,18 @@ ALLOWED_HOSTS = ['*']
 RESTAURANT_NAME = "Tasty Bites" 
 
 # Application definition
+# settings.py
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  
+# For production, configure SMTP (example with Gmail):
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = "your_email@gmail.com"
+# EMAIL_HOST_PASSWORD = "your_password"
 
+DEFAULT_FROM_EMAIL = "restaurant@example.com"
+RESTAURANT_EMAIL = "owner@example.com"
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
