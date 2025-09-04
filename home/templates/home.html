@@ -10,7 +10,11 @@
     <div class="container"><!-- templates/home.html -->
             <!-- templates/home.html -->
 <h1>Welcome to Our Restaurant</h1>
+<h1>Welcome to {{ restaurant.name }}</h1>
 
+<div style="float:right;">
+    🛒 Cart: {{ cart_count }} items
+</div>
 {% if location %}
   <h3>Find Us At:</h3>
   <p>{{ location.address }}, {{ location.city }}, {{ location.state }} {{ location.zip_code }}</p>
