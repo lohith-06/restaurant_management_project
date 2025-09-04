@@ -31,4 +31,6 @@ def home(request):
         request,
         "home.html",
         {"menu_items": menu_items, "location": location, "query": query},
-    )
+def home_view(request):
+    restaurant = Restaurant.objects.first()  # assuming one restaurant
+    return render(request, "home.html", {"restaurant": restaurant})
