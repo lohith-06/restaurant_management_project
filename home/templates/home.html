@@ -23,7 +23,14 @@
 </form>
 
 <hr>
+<h1>Welcome to {{ restaurant.name }}</h1>
 
+{% if restaurant.logo %}
+    <img src="{{ restaurant.logo.url }}" alt="Restaurant Logo" style="max-width:200px; height:auto;">
+{% endif %}
+
+<p><strong>Address:</strong> {{ restaurant.address }}, {{ restaurant.city }}, {{ restaurant.state }} - {{ restaurant.zip_code }}</p>
+<p><strong>Phone:</strong> {{ restaurant.phone_number }}</p>
 <h2>Our Menu</h2>
 <ul>
   {% for item in menu_items %}
