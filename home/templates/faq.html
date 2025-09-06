@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FAQ - Our Restaurant</title>
+</head>
+<body>
+    <h1>Frequently Asked Questions</h1>
+
+    <ul>
+        {% for faq in faqs %}
+            <li>
+                <strong>Q: {{ faq.question }}</strong><br>
+                A: {{ faq.answer }}
+            </li>
+            <br>
+        {% endfor %}
+    </ul>
+
+    <p><a href="{% url 'home' %}">← Back to Homepage</a></p>
+</body>
+</html>
