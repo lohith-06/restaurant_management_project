@@ -27,9 +27,23 @@
 </form>
 
 <hr>
-<h1>Welcome to {{ restaurant.name }}</h1>
-<h1>Welcome to {{ restaurant.name }}</h1>
+{% extends "base.html" %}
 
+{% block content %}
+<h2>Welcome to Our Restaurant</h2>
+<p class="tagline">✨ Serving delicious food made with love, passion, and tradition ✨</p>
+
+<!-- Phone Number Section -->
+<div class="contact-info">
+    <strong>📞 Call Us:</strong> <span class="phone">{{ phone_number }}</span>
+</div>
+
+<hr>
+
+<a href="{% url 'menu' %}">View Menu</a> | 
+<a href="{% url 'about' %}">About Us</a> | 
+<a href="{% url 'contact' %}">Contact</a>
+{% endblock %
 <div style="margin-top:20px;">
     <strong>📅 Today’s Date & Time:</strong> 
     {{ current_time|date:"l, F j, Y, g:i A" }}
