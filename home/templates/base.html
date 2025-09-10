@@ -4,6 +4,52 @@
 <head>
     <title>{% block title %}My Restaurant{% endblock %}</title>
     <style>
+    .cta-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 28px 0;
+}
+
+/* Primary Order button */
+.order-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff7a59 0%, #ff3d6e 100%);
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 28px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-radius: 999px;             /* pill shape */
+  box-shadow: 0 8px 20px rgba(255, 61, 110, 0.18);
+  transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Hover / focus states */
+.order-btn:hover,
+.order-btn:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(255, 61, 110, 0.20);
+  outline: none;
+  opacity: 0.98;
+}
+
+/* Active state */
+.order-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  .order-btn {
+    width: 90%;
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+}
     .contact-info {
         font-size: 18px;
         text-align: center;
