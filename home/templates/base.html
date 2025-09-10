@@ -87,18 +87,23 @@
     }
     </style>
 </head>
-<body>
-    <header>
-        <h1>🍽️ My Restaurant</h1>
+<body><header>
+        <h1>My Restaurant</h1>
+        <nav>
+            <a href="{% url 'home' %}">Home</a> |
+            <a href="{% url 'menu' %}">Menu</a> |
+            <a href="{% url 'order_confirmation' %}">Orders</a>
+        </nav>
     </header>
 
-    <!-- Breadcrumbs -->
+    <!-- Breadcrumb section -->
     <div class="breadcrumbs">
         {% block breadcrumbs %}{% endblock %}
     </div>
 
+    <!-- Page content -->
     <main>
         {% block content %}{% endblock %}
-    </main>
+    </main
 </body>
 </html>
