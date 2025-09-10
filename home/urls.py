@@ -13,4 +13,5 @@ path("menu/", views.menu_view, name="menu"),
  path('', views.home_view, name='home'),
     path('faq/', views.faq_view, name='faq'),
     path('about/', views.about_view, name='about'), 
+    path('privacy-policy/', views.privacy_policy_view, name='privacy_policy'),
 ]
