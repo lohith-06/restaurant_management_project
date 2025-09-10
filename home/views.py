@@ -39,6 +39,11 @@ from django.utils import timezone
 from .models import Restaurant
 from .utils import get_cart_count
 
+
+def order_confirmation_view(request):
+    # Generate a simple order number (in real apps, fetch from DB)
+    order_number = random.randint(1000, 9999)
+    return render(request, "order_confirmation.html", {"order_number": order_number})
 def home_view(request):
     restaurant = Restaurant.objects.first()
     cart_count = get_cart_count(request)
