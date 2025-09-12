@@ -1,27 +1,56 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}My Restaurant{% endblock %}</title>
+    <title>Home</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 150px 20px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+        }
+
+        .food-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .food-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .food-gallery img:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-        {% extends "base.html" %}
 
-        {% block title %}Home - {{ restaurant_name }}{% endblock %}
+<div class="hero">
+    <h1>Welcome to Our Restaurant</h1>
+    <p>Delicious food, made with love</p>
+</div>
 
-        {% block content %}
-        <h1>Welcome to {{ restaurant_name }}</h1>
-        <p>Enjoy our delicious meals!</p>
-        {% endblock %}
-    <!-- Page Content -->
-    <div class="content">
-        {% block content %}{% endblock %}
-    </div>
-
-    <!-- Footer -->
-    <footer style="background:#222; color:#fff; text-align:center; padding:15px; margin-top:30px;">
-        <p>&copy; {{ restaurant_name }} {{ year }}. All Rights Reserved.</p>
-    </footer>
+<div class="food-gallery">
+    <img src="{% static 'images/dish1.jpg' %}" alt="Dish 1">
+    <img src="{% static 'images/dish2.jpg' %}" alt="Dish 2">
+    <img src="{% static 'images/dish1.jpg' %}" alt="Dish 3">
+    <img src="{% static 'images/dish2.jpg' %}" alt="Dish 4">
+</div>
 
 </body>
 </html>
