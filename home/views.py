@@ -55,7 +55,7 @@
 #     })
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import MenuItem, RestaurantInfo # assume you already have this model
+from .models import MenuItem, RestaurantInfo , OpeningHour# assume you already have this model
 from .forms import ContactForm
 
 def contact_view(request):
@@ -83,6 +83,9 @@ def add_to_cart(request, item_id):
     request.session['cart'] = cart
     return redirect('view_cart')
 
+def home(request):
+    opening_hours = OpeningHour.objects.all()
+    return render(request, 'home.html', {'opening_hours': opening_hours})
 def view_cart(request):
     cart = request.session.get('cart', {})
     items = []
