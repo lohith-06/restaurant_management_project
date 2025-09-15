@@ -1,16 +1,32 @@
-<h2>Contact Us</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Send</button>
-</form>
-
-{% if form.errors %}
-  <ul>
-    {% for field, errors in form.errors.items %}
-      {% for error in errors %}
-        <li style="color:red;">{{ error }}</li>
-      {% endfor %}
-    {% endfor %}
-  </ul>
-{% endif %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+</head>
+<body>
+  <div class="contact-container">
+    <h1>Contact Us</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      
+      <div>
+        {{ form.name.label_tag }} {{ form.name }}
+        {{ form.name.errors }}
+      </div>
+      <div>
+        {{ form.email.label_tag }} {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+      <div>
+        {{ form.message.label_tag }} {{ form.message }}
+        {{ form.message.errors }}
+      </div>
+      
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</body>
+</html>
