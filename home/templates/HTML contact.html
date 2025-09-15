@@ -3,7 +3,61 @@
 <html>
 <head>
   <title>Contact Us</title>
-  <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+  <style> body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+}
+
+.contact-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.contact-container h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.contact-container form div {
+    margin-bottom: 20px;
+}
+
+.contact-container label {
+    display: block;
+    margin-bottom: 6px;
+    color: #555;
+    font-weight: bold;
+}
+
+.contact-container input,
+.contact-container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.contact-container button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.contact-container button:hover {
+    background: #45a049;
+}</style>
 </head>
 <body>
   <div class="contact-container">
