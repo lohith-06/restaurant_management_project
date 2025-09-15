@@ -57,9 +57,15 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import MenuItem, RestaurantInfo # assume you already have this model
 
-def contact_us(request):
-    info = RestaurantInfo.objects.first()
-    return render(request, 'contact_us.html', {'info': info})
+def contact_us(request): 
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        message = request.POST.get('message')
+        Contact.objects.create(name=name, message=message)
+        return redirect('thank_you')
+    return render(request, 'contact_us.html')
+def thank_you(request):
+    return render(request, 'thank_you.html')
 def add_to_cart(request, item_id):
     item = MenuItem.objects.get(id=item_id)
     cart = request.session.get('cart', {})
