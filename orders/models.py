@@ -33,3 +33,12 @@ class OrderItem(models.Model):
 
     def get_subtotal(self):
         return self.quantity * self.menu_item.price
+
+class OrderStatus(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    class Meta:
+        verbose_name_plural = "Order Statuses"
+
+    def __str__(self):
+        return self.name
