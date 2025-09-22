@@ -34,54 +34,54 @@
 # def home_view(request):
 #     restaurant = Restaurant.objects.first()  # assuming one restaurant
 #     return render(request, "home.html", {"restaurant": restaurant})
-# from django.shortcuts import render
-# from django.utils import timezone
-# from .models import Restaurant
-# from .utils import get_cart_count
+from django.shortcuts import render
+from django.utils import timezone
+from .models import Restaurant
+from .utils import get_cart_count
 
 
-# def order_confirmation_view(request):
-#     # Generate a simple order number (in real apps, fetch from DB)
-#     order_number = random.randint(1000, 9999)
-#     return render(request, "order_confirmation.html", {"order_number": order_number})
-# def home_view(request):
-#     restaurant = Restaurant.objects.first()
-#     cart_count = get_cart_count(request)
-#     current_time = timezone.now()
-#     return render(request, "home.html", {
-#         "restaurant": restaurant,
-#         "cart_count": cart_count,
-#         "current_time": current_time
-#     })
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from .models import MenuItem, RestaurantInfo , OpeningHour# assume you already have this model
-from .forms import ContactForm
+def order_confirmation_view(request):
+    # Generate a simple order number (in real apps, fetch from DB)
+    order_number = random.randint(1000, 9999)
+    return render(request, "order_confirmation.html", {"order_number": order_number})
+def home_view(request):
+    restaurant = Restaurant.objects.first()
+    cart_count = get_cart_count(request)
+    current_time = timezone.now()
+    return render(request, "home.html", {
+        "restaurant": restaurant,
+        "cart_count": cart_count,
+        "current_time": current_time
+    })
+# from django.shortcuts import render, redirect
+# from django.http import HttpResponse
+# from .models import MenuItem, RestaurantInfo , OpeningHour# assume you already have this model
+# from .forms import ContactForm
 
-def contact_view(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            # handle valid data
-            return redirect('thank_you')
-    else:
-        form = ContactForm()
-    return render(request, 'contact.html', {'form': form})
-def contact_us(request): 
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        message = request.POST.get('message')
-        Contact.objects.create(name=name, message=message)
-        return redirect('thank_you')
-    return render(request, 'contact_us.html')
-def thank_you(request):
-    return render(request, 'thank_you.html')
-def add_to_cart(request, item_id):
-    item = MenuItem.objects.get(id=item_id)
-    cart = request.session.get('cart', {})
-    cart[str(item_id)] = cart.get(str(item_id), 0) + 1
-    request.session['cart'] = cart
-    return redirect('view_cart')
+# def contact_view(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             # handle valid data
+#             return redirect('thank_you')
+#     else:
+#         form = ContactForm()
+#     return render(request, 'contact.html', {'form': form})
+# def contact_us(request): 
+#     if request.method == 'POST':
+#         name = request.POST.get('name')
+#         message = request.POST.get('message')
+#         Contact.objects.create(name=name, message=message)
+#         return redirect('thank_you')
+#     return render(request, 'contact_us.html')
+# def thank_you(request):
+#     return render(request, 'thank_you.html')
+# def add_to_cart(request, item_id):
+#     item = MenuItem.objects.get(id=item_id)
+#     cart = request.session.get('cart', {})
+#     cart[str(item_id)] = cart.get(str(item_id), 0) + 1
+#     request.session['cart'] = cart
+#     return redirect('view_cart')
 
 def home(request):
     opening_hours = OpeningHour.objects.all()
