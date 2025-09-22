@@ -11,7 +11,7 @@ urlpatterns = [\
     path("logout/", auth_views.LogoutView.as_view(next_page="home"), name="logout"),
 path("menu/", views.menu_view, name="menu"),   
  path('', views.home_view, name='home'), path('thank-you/', views.thank_you, name='thank_you'),
-    path('faq/', views.faq_view, name='faq'), path('contact/', views.contact_us, name='contact_us'),
+    path('faq/', views.faq_view, name='faq'), path('contact/', views.contact_us, name='contact_us'),path('api/categories/', MenuCategoryListView.as_view(), name='menu-category-list'),
     path('about/', views.about_view, name='about'), 
     path('privacy-policy/', views.privacy_policy_view, name='privacy_policy'),path('add-to-cart/<int:item_id>/', views.add_to_cart, name='add_to_cart'),
 ]
