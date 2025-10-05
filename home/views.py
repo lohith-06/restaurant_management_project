@@ -102,32 +102,64 @@
 
 #     return render(request, 'cart.html', {'items': items, 'total': total})
 
-from rest_framework import viewsets, pagination
+# from rest_framework import viewsets, pagination
+# from rest_framework.response import Response
+# from .models import MenuItem
+# from .serializers import MenuItemSerializer
+
+# class MenuItemPagination(pagination.PageNumberPagination):
+#     page_size = 10
+#     page_size_query_param = 'page_size'
+#     max_page_size = 50
+
+
+# class MenuItemSearchViewSet(viewsets.ViewSet):
+#     """
+#     Search menu items by name using ?search=<query>
+#     Example: /api/menu/search/?search=pizza
+#     """
+#     pagination_class = MenuItemPagination
+
+#     def list(self, request):
+#         query = request.query_params.get('search', '')
+#         items = MenuItem.objects.all()
+
+#         if query:
+#             items = items.filter(name__icontains=query)
+
+#         paginator = self.pagination_class()
+#         page = paginator.paginate_queryset(items, request)
+#         serializer = MenuItemSerializer(page, many=True)
+#         return paginator.get_paginated_response(serializer.data)
+
+from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from .models import MenuItem
 from .serializers import MenuItemSerializer
 
-class MenuItemPagination(pagination.PageNumberPagination):
-    page_size = 10
-    page_size_query_param = 'page_size'
-    max_page_size = 50
-
-
-class MenuItemSearchViewSet(viewsets.ViewSet):
+class MenuItemsByCategoryView(APIView):
     """
-    Search menu items by name using ?search=<query>
-    Example: /api/menu/search/?search=pizza
+    Retrieve menu items filtered by category.
+    Example: /api/menu-items/?category=pizza
     """
-    pagination_class = MenuItemPagination
 
-    def list(self, request):
-        query = request.query_params.get('search', '')
-        items = MenuItem.objects.all()
+    def get(self, request, *args, **kwargs):
+        category_name = request.query_params.get('category', None)
 
-        if query:
-            items = items.filter(name__icontains=query)
+        if not category_name:
+            return Response(
+                {"error": "Category parameter is required."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-        paginator = self.pagination_class()
-        page = paginator.paginate_queryset(items, request)
-        serializer = MenuItemSerializer(page, many=True)
-        return paginator.get_paginated_response(serializer.data)
+        menu_items = MenuItem.objects.filter(category__category_name__iexact=category_name)
+
+        if not menu_items.exists():
+            return Response(
+                {"message": f"No menu items found for category '{category_name}'."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        serializer = MenuItemSerializer(menu_items, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
