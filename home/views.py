@@ -34,25 +34,25 @@
 # def home_view(request):
 #     restaurant = Restaurant.objects.first()  # assuming one restaurant
 #     return render(request, "home.html", {"restaurant": restaurant})
-from django.shortcuts import render
-from django.utils import timezone
-from .models import Restaurant
-from .utils import get_cart_count
+# from django.shortcuts import render
+# from django.utils import timezone
+# from .models import Restaurant
+# from .utils import get_cart_count
 
 
-def order_confirmation_view(request):
-    # Generate a simple order number (in real apps, fetch from DB)
-    order_number = random.randint(1000, 9999)
-    return render(request, "order_confirmation.html", {"order_number": order_number})
-def home_view(request):
-    restaurant = Restaurant.objects.first()
-    cart_count = get_cart_count(request)
-    current_time = timezone.now()
-    return render(request, "home.html", {
-        "restaurant": restaurant,
-        "cart_count": cart_count,
-        "current_time": current_time
-    })
+# def order_confirmation_view(request):
+#     # Generate a simple order number (in real apps, fetch from DB)
+#     order_number = random.randint(1000, 9999)
+#     return render(request, "order_confirmation.html", {"order_number": order_number})
+# def home_view(request):
+#     restaurant = Restaurant.objects.first()
+#     cart_count = get_cart_count(request)
+#     current_time = timezone.now()
+#     return render(request, "home.html", {
+#         "restaurant": restaurant,
+#         "cart_count": cart_count,
+#         "current_time": current_time
+#     })
 # from django.shortcuts import render, redirect
 # from django.http import HttpResponse
 # from .models import MenuItem, RestaurantInfo , OpeningHour# assume you already have this model
@@ -83,21 +83,51 @@ def home_view(request):
 #     request.session['cart'] = cart
 #     return redirect('view_cart')
 
-def home(request):
-    opening_hours = OpeningHour.objects.all()
-    return render(request, 'home.html', {'opening_hours': opening_hours})
-def view_cart(request):
-    cart = request.session.get('cart', {})
-    items = []
-    total = 0
+# def home(request):
+#     opening_hours = OpeningHour.objects.all()
+#     return render(request, 'home.html', {'opening_hours': opening_hours})
+# def view_cart(request):
+#     cart = request.session.get('cart', {})
+#     items = []
+#     total = 0
 
-    for item_id, qty in cart.items():
-        item = MenuItem.objects.get(id=item_id)
-        items.append({
-            'item': item,
-            'quantity': qty,
-            'subtotal': item.price * qty
-        })
-        total += item.price * qty
+#     for item_id, qty in cart.items():
+#         item = MenuItem.objects.get(id=item_id)
+#         items.append({
+#             'item': item,
+#             'quantity': qty,
+#             'subtotal': item.price * qty
+#         })
+#         total += item.price * qty
 
-    return render(request, 'cart.html', {'items': items, 'total': total})
+#     return render(request, 'cart.html', {'items': items, 'total': total})
+
+from rest_framework import viewsets, pagination
+from rest_framework.response import Response
+from .models import MenuItem
+from .serializers import MenuItemSerializer
+
+class MenuItemPagination(pagination.PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 50
+
+
+class MenuItemSearchViewSet(viewsets.ViewSet):
+    """
+    Search menu items by name using ?search=<query>
+    Example: /api/menu/search/?search=pizza
+    """
+    pagination_class = MenuItemPagination
+
+    def list(self, request):
+        query = request.query_params.get('search', '')
+        items = MenuItem.objects.all()
+
+        if query:
+            items = items.filter(name__icontains=query)
+
+        paginator = self.pagination_class()
+        page = paginator.paginate_queryset(items, request)
+        serializer = MenuItemSerializer(page, many=True)
+        return paginator.get_paginated_response(serializer.data)
